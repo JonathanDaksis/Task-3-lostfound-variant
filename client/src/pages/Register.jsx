@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Register() {
   const { register } = useAuth()
@@ -24,12 +24,24 @@ export default function Register() {
   return (
     <div className="max-w-md mx-auto card">
       <h1 className="text-xl font-semibold mb-4">Register</h1>
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <input className="input" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
-        <input className="input" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input className="input" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        {error && <div className="text-red-600 text-sm">{error}</div>}
-        <button className="btn" type="submit">Create account</button>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="label" htmlFor="name">Name</label>
+          <input id="name" className="input" value={name} onChange={e => setName(e.target.value)} />
+        </div>
+        <div>
+          <label className="label" htmlFor="email">Email</label>
+          <input id="email" className="input" type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <label className="label" htmlFor="password">Password</label>
+          <input id="password" className="input" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        </div>
+        {error && <div className="error">{error}</div>}
+        <button className="btn btn-primary w-full" type="submit">Create account</button>
+        <p className="text-sm text-center text-zinc-600">
+          Already registered? <Link to="/login" className="text-indigo-600 font-medium hover:underline">Login</Link>
+        </p>
       </form>
     </div>
   )

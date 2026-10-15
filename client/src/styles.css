@@ -5,8 +5,39 @@
 :root {
   --bg: #0b1020;
 }
-body { @apply bg-zinc-50 text-zinc-900; }
+body { @apply bg-zinc-100 text-zinc-900 antialiased; }
 .container { @apply max-w-5xl mx-auto p-4; }
-.btn { @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 font-medium border border-zinc-300 hover:bg-zinc-100; }
-.input { @apply w-full rounded-lg border border-zinc-300 px-3 py-2; }
-.card { @apply rounded-2xl border border-zinc-200 p-4 shadow-sm bg-white; }
+
+/* Buttons: `.btn` is the shared shape; always pair it with one variant below. */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium
+         border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
+/* main action on a page: Save, Login, Create account, Report Item */
+.btn-primary { @apply bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700 hover:border-indigo-700 focus-visible:ring-indigo-500; }
+/* secondary action: Edit, Cancel, Login link */
+.btn-secondary { @apply bg-white border-zinc-300 text-zinc-800 hover:bg-zinc-50 hover:border-zinc-400 focus-visible:ring-zinc-400; }
+/* destructive action: Delete */
+.btn-danger { @apply bg-white border-red-300 text-red-700 hover:bg-red-600 hover:border-red-600 hover:text-white focus-visible:ring-red-500; }
+/* low-emphasis action: Logout */
+.btn-ghost { @apply bg-transparent border-transparent text-zinc-600 hover:bg-zinc-200 hover:text-zinc-900 focus-visible:ring-zinc-400; }
+
+/* Sidebar links; NavLink adds `.active` to the link for the current page */
+.side-link { @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900; }
+.side-link.active { @apply bg-indigo-50 text-indigo-700; }
+.avatar { @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-semibold text-white; }
+
+.label { @apply block text-sm font-medium text-zinc-700 mb-1; }
+.input {
+  @apply w-full rounded-lg border border-zinc-300 bg-white px-3 py-2
+         focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500;
+}
+.card { @apply rounded-2xl border border-zinc-200 p-5 shadow-sm bg-white; }
+.error { @apply rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700; }
+
+/* status badges on item cards */
+.badge { @apply inline-block rounded-full px-2 py-0.5 text-xs font-semibold capitalize; }
+.badge-lost { @apply bg-amber-100 text-amber-800; }
+.badge-found { @apply bg-emerald-100 text-emerald-800; }
+.badge-claimed { @apply bg-zinc-200 text-zinc-700; }
